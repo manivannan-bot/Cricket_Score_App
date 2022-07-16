@@ -23,7 +23,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 ## Installation
   
-1. `git clone -b main 
+1. `git clone -b main https://github.com/manivannan-bot/Cricket_Score_App.git`
 
 2. Update new git project URL
 
@@ -39,9 +39,9 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
 
 8. `composer dumpautoload -o`
 
-9. `php artisan migrate:refresh --seed`
+9. `php artisan migrate`
 
-10. `php artisan storage:link`
+10. `php artisan serve`
   
 
 ## Learning Laravel
