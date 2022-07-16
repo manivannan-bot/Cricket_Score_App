@@ -1,28 +1,5 @@
 
 <style>
-/* 
- *{
-  margin:0px;
-  padding:0px;
-
-}
-
-.container{
-  display:flex;
-
-} 
-
- .card-header{
-
-  width:100%;
-  height:100px;
-  background-color:blue;
-}  */
-
-
-
-
-
 
 
 </style>
