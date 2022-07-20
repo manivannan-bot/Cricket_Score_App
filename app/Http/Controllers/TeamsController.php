@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\teams;
+use App\Models\score_cards;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +42,7 @@ class TeamsController extends Controller
       return view('create_player',array('Members'=>$data,'Teams'=>$teams));
 
      }
+
      public function view($team_id){
   
       $data = DB::table('teams')
@@ -49,14 +51,49 @@ class TeamsController extends Controller
                 ->where('teams.user_id',Auth::user()->id)
                 ->where('players.team_id',$team_id)
                 ->get(); 
-        //dd($data);
+       
       return view('view_player',['players'=>$data]);
+     }
+    
 
+
+     public function batting_records($team_id){
+  
+      $data = DB::table('players as p')
+              ->select('p.id','p.name','p.team_id',
+              DB::raw('(select sum(runs) from score_cards where score_cards.player_id=p.id) as truns'),
+              DB::raw('(select sum(balls) from score_cards where score_cards.player_id=p.id) as tballs'),
+              DB::raw('(select sum(fours) from score_cards where score_cards.player_id=p.id) as tfours'),
+              DB::raw('(select sum(sixes) from score_cards where score_cards.player_id=p.id) as tsixes'),
+              DB::raw('(select round(avg(strike_rate),2) from score_cards where score_cards.player_id=p.id) as tstrike_rate'),
+              DB::raw('(select count(match_id) from score_cards where score_cards.player_id=p.id) as tmatches'),
+              DB::raw('(select count(dismissed_status) from score_cards where score_cards.player_id=p.id and dismissed_status="OUT") as tout'),
+              DB::raw('(select count(dismissed_status) from score_cards where score_cards.player_id=p.id and dismissed_status="NOT OUT") as tnotout'),
+              )
+              ->where('p.team_id','=',$team_id)
+              ->get();
+        //dd($data);
+      return view('records.batting_records',['players'=>$data]);
      }
 
-     
 
 
+     public function bowling_records($team_id){
+  
+      $data = DB::table('players as p')
+              ->select('p.id','p.name','p.team_id',
+              DB::raw('(select sum(overs) from score_cards where score_cards.player_id=p.id) as tovers'),
+              DB::raw('(select sum(maidens) from score_cards where score_cards.player_id=p.id) as tmaidens'),
+              DB::raw('(select sum(runs_conceded) from score_cards where score_cards.player_id=p.id) as truns_conceded'),
+              DB::raw('(select sum(wickets) from score_cards where score_cards.player_id=p.id) as twickets'),
+              DB::raw('(select avg(economy) from score_cards where score_cards.player_id=p.id) as teconomy'),
+              DB::raw('(select count(match_id) from score_cards where score_cards.player_id=p.id) as tmatches'),
+              
+              )
+              ->where('p.team_id','=',$team_id)
+              ->get();
 
+      return view('records.bowling_records',['players'=>$data]);
+     }
 
 }

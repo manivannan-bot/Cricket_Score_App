@@ -28,13 +28,14 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index']);
 
-
 Route::view('create_match', 'create_match');
 Route::post('create_match', [App\Http\Controllers\MatchController::class, 'index']);
 Route::get('create_match', [App\Http\Controllers\MatchController::class, 'show_team']);
 
 Route::view('create_team', 'create_team');
 Route::post('create_team', [App\Http\Controllers\TeamsController::class, 'index']);
+Route::get('batting_records/{team_id}', [App\Http\Controllers\TeamsController::class, 'batting_records']);
+Route::get('bowling_records/{team_id}', [App\Http\Controllers\TeamsController::class, 'bowling_records']);
 
 Route::view('create_player', 'create_player');
 Route::post('create_player', [App\Http\Controllers\PlayersController::class, 'index']);
@@ -53,3 +54,7 @@ Route::post('create_score_card/edit/update',[App\Http\Controllers\ScoreControlle
 Route::get('create_score_card/delete/{score_id}',[App\Http\Controllers\ScoreController::class, 'delete'] );
 
 Route::get('view_score_card/{match_id}',[App\Http\Controllers\ScoreController::class, 'view'] );
+
+
+Route::get('create_summary/{match_id}', [App\Http\Controllers\SummaryController::class, 'index'] );
+Route::post('create_summary/create',[App\Http\Controllers\SummaryController::class, 'create'] );

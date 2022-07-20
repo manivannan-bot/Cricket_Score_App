@@ -57,9 +57,15 @@ return view('edit_player',array('Members'=>$data));
       return redirect('create_player')->with('message','success player updated successfully');
      }
 
-     public function delete($id){  
-       DB::delete('delete from players where id= ?',[$id]);
-      
+     public function delete($id){
+      $players=players::withCount('team_id')->findOrFail($id); 
+      if( $players->delete())
+      {
+        return redirect('create_player')->with('message','success player deleted successfully');
+      }
+      else{
+        return redirect('create_player')->with('message','cannot delete player');
+      }
       return redirect('create_player')->with('message','success player deleted successfully');
      }
 }

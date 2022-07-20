@@ -172,8 +172,11 @@ return view('create_score_card',['players'=>$players,'match_id'=>$match_id,'scor
                    ->join('players','score_cards.player_id','=','players.id')
                    ->select('score_cards.*','players.name')
                    ->where('match_id',$match_id)->get();
-   
-     return view('view_score_card',['scores'=>$scores])->with('message','score deleted successfully');
+      $matches=DB::table('matches')
+                   ->select('matches.*')
+                   ->where('matches.id',$match_id)->get();
+                   
+     return view('view_score_card',['matches'=>$matches,'scores'=>$scores])->with('message','score deleted successfully');
   }
 
      

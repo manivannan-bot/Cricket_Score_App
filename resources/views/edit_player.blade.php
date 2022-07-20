@@ -1,5 +1,37 @@
 <!DOCTYPE html>
 <html>
+  <style>
+
+*{
+  margin:0px;
+  padding:0px;
+}
+
+#Submit{
+background-color:#1d3557;
+padding:7px;
+border:none;
+border-radius:5px;
+color:white;
+}
+body{
+    background-color:#fcd5ce;
+    padding-left:15px;
+}
+
+#tet{
+  font-weight:bold;
+}
+* input{
+ background-color:#f1faee;
+ margin-bottom:10px;
+ color:black;
+ border:none;
+border-radius:5px;
+padding:8px;
+
+}
+    </style>
 <body>
 {{$errors->first('name')}}
 <h2>Edit Player Form</h2>
@@ -14,11 +46,11 @@
   <div class="alert-danger">{{$errors->first('id')}}</div>
 
   <input type="hidden" name="team_id"   value="{{$member->team_id}}" ></input> 
-  <lable>Team Name: {{$member->short_name}}</lable>     
-   <br><div class="alert-danger">{{$errors->first('team_id')}}</div>
+  <lable id="tet">Team Name: {{$member->short_name}}</lable>     
+   <br><div class="alert-danger">{{$errors->first('team_id')}}</div><br>
 
 
-  <label for="fname">player  Name:</label><br>
+  <label for="fname" id="tet">Player  Name:</label><br>
   <input type="text"  name="name" value="{{$member->name}}" required><br>
   <div class="alert-danger">{{$errors->first('name')}}</div>
 @endforeach
@@ -26,7 +58,7 @@
 
   <br>
   <br>
-  <input type="submit" value="Submit">
+  <input type="submit" value="Submit" id="Submit">
 </form> 
 
 

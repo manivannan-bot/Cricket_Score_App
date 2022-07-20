@@ -43,9 +43,8 @@ class MatchController extends Controller
             
        return redirect('/home')->with('message','success match added successfully');
     }
-
-    
-       public function show_team(){
+     
+    public function show_team(){
        
         $teams = DB::table('teams')
                   ->select('teams.id','teams.name')
@@ -55,4 +54,5 @@ class MatchController extends Controller
         return view('create_match',array('teams'=>$teams));
   
        }
+    
 }

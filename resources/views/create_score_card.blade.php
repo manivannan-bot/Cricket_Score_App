@@ -8,6 +8,38 @@
       top:100px;
 
     }
+
+    body{
+    background-color:#fcd5ce;
+    padding-left:15px;
+}
+
+* input{
+ background-color:#f1faee;
+ margin-bottom:10px;
+ color:black;
+ border:none;
+border-radius:5px;
+padding:8px;
+
+}
+
+th{
+  background-color:#1d3557;
+  color:white;
+  }
+
+ tr:nth-child(odd)
+ {
+  background-color:#e9edc9;
+}
+
+tr:nth-child(even){
+  background-color:#fefae0;
+  z-index:10px;
+}
+
+
     body{
       display:flex;
       position: relative;
@@ -32,6 +64,59 @@
       font-size:18px;
     }
 
+    #col button{
+
+border:none;
+padding :5px;
+font-size:15px;
+color:white;
+  background-color:#1d3557;
+  border-radius:5px;
+}
+
+#col a{
+text-decoration:none;
+color:white;
+background-color:#1d3557;
+
+}
+#Submit{
+background-color:#1d3557;
+padding:7px;
+border:none;
+border-radius:5px;
+color:white;
+}
+
+button a{
+  text-decoration:none;
+}
+
+
+#Select{
+    background-color:#f1faee;
+    border-radius:5px;
+    padding:3px;
+
+}
+
+#back{
+  position:absolute;
+  right:0px;
+  top:10px;
+}
+th{
+  height:40px;
+}
+.hed{
+  font-size:20px;
+  font-weight:bold;
+}
+.card{
+  font-size:20px;
+  font-weight:bold;
+}
+
 
     </style>
 
@@ -41,16 +126,16 @@
   <div class="con2">
   
 <form action="create" method="post">
-<label class="hed"> Create Players Score Card</label>
+<label class="hed"> Create Players Score Card</label><br>
   @csrf
   <input type="hidden"  name="match_id" value="{{$match_id}}"><br><br>
  
-  <label for="lname">players:</label><br>
-  <select name="player_id">
+  <label for="lname">Players:</label><br>
+  <select name="player_id" id="Select">
   @foreach($players as $player)
   <option value="{{$player->id}}">{{$player->name}}</option>
   @endforeach
-</select>
+</select><br>
   <br>
   <label for="fname">Runs:</label><br>
   <input type="number" placeholder="Enter runs" name="runs" value="" required><br>
@@ -67,11 +152,11 @@
   <input type="number" placeholder="Enter sixes" name="sixes" value="" required><br>
   <div class="alert-danger">{{$errors->first('sixes')}}</div>
 
-  <label for="lname">Dismissed status:</label><br>
-  <select name="dismissed_status">
+  <label for="lname">Dismissed status:</label><br><br>
+  <select name="dismissed_status" id="Select">
   <option value="NOT OUT">NOT OUT</option>
   <option value="OUT">OUT</option>
-  </select><br>
+  </select><br><br>
   
   <label for="lname">Overs:</label><br>
   <input type="number" placeholder="Enter overs" name="overs" value="" required><br><br>
@@ -89,29 +174,32 @@
   <input type="number" placeholder="Enter wickets" name="wickets" value="" required><br><br>
   <div class="alert-danger">{{$errors->first('wickets')}}</div>
 
-  <input type="submit" value="Submit">
+  <input type="submit" value="Submit" id="Submit">
 </form> 
 <br>
 <br>
-<button><a href="/home"> click here to go home</a></button>
-  </div>
+</div>
+<div id="back">
+<button  id="Submit" ><a href="/home" id="Submit"> click here to go home</a></button>
+</div>
 
 <p class="card">SCORE CARD:</p>
 
 
-<table border="1" class="table">
-                <tr> <td>name</td>
-                    <td>runs</td>
-                    <td>balls</td>
-                    <td>fours</td>
-                    <td>sixes</td>
-                    <td>strike_rate</td>
-                    <td>dismissed_status</td>
-                    <td>overs</td>
-                    <td>maidens</td>
-                    <td>runs_conceded</td>
-                    <td>wickets</td>
-                    <td>economy</td>
+<table class="table">
+                <tr> <th>Name</th>
+                    <th>Runs</th>
+                    <th>Balls</th>
+                    <th>Fours</th>
+                    <th>Sixes</th>
+                    <th>Strike_rate</th>
+                    <th>Dismissed_status</th>
+                    <th>Overs</th>
+                    <th>Maidens</td>
+                    <th>Runs_conceded</th>
+                    <th>Wickets</th>
+                    <th>Economy</th>
+                    <th colspan="2">Actions</th>
                   </tr>
                  
                   <tr>
@@ -128,8 +216,8 @@
                     <td>{{$score->runs_conceded}}</td>
                     <td>{{$score->wickets}}</td>
                     <td>{{$score->economy}}</td>
-                    <td><a href="edit/{{{$score->id}}}">edit</a></td>
-                    <td><a href="delete/{{{$score->id}}}">delete</a></td>
+                    <td id="col"><button><a href="edit/{{{$score->id}}}">edit</a></button></td>
+                    <td id="col"><button><a href="delete/{{{$score->id}}}">delete</a></button></td>
         
                      </tr>
                      @endforeach

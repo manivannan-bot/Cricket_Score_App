@@ -1,3 +1,25 @@
+
+<html>
+   <style>
+ .card-header{
+    position:absolute;
+    top:10px;
+    left:10px;
+ }
+.container{
+    padding:10px;
+ }
+
+ body{
+    background-color:#fcd5ce;
+ }
+
+
+    </style>
+
+
+<body>
+
 @extends('layouts.app')
 
 @section('content')
@@ -21,7 +43,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <br><input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -33,7 +55,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <br><button type="submit" class="btn btn-primary">
                                     {{ __('Send Password Reset Link') }}
                                 </button>
                             </div>
@@ -45,3 +67,6 @@
     </div>
 </div>
 @endsection
+
+</body>
+</html>

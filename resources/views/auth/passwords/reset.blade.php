@@ -1,3 +1,27 @@
+
+<html>
+   <style>
+ .card-header{
+    position:absolute;
+    top:10px;
+    left:10px;
+ }
+.container{
+    padding:10px;
+ }
+
+ body{
+    background-color:#fcd5ce;
+ }
+
+
+    </style>
+
+
+<body>
+   
+
+
 @extends('layouts.app')
 
 @section('content')
@@ -63,3 +87,6 @@
     </div>
 </div>
 @endsection
+
+</body>
+</html>
